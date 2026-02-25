@@ -1,0 +1,12 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Config files with cached IDs (generated per-user)
+.cc-config.json
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo

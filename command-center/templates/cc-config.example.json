@@ -1,0 +1,64 @@
+{
+  "_comment": "Command Center configuration — DO NOT add secrets to this file",
+  "_docs": "See README.md for full documentation",
+
+  "version": 1,
+
+  "project": {
+    "id": "PVT_kwDOAxxxxxxx",
+    "number": 1,
+    "title": "Command Center",
+    "url": "https://github.com/users/yourname/projects/1",
+    "owner": "yourname",
+    "ownerType": "user"
+  },
+
+  "fields": {
+    "Status": {
+      "id": "PVTSSF_xxxxxx",
+      "options": {
+        "Backlog": "xxxxxxxx",
+        "Todo": "xxxxxxxx",
+        "In Progress": "xxxxxxxx",
+        "Done": "xxxxxxxx"
+      }
+    },
+    "Priority": {
+      "id": "PVTSSF_xxxxxx",
+      "options": {
+        "High": "xxxxxxxx",
+        "Medium": "xxxxxxxx",
+        "Low": "xxxxxxxx"
+      }
+    },
+    "Effort": {
+      "id": "PVTSSF_xxxxxx",
+      "options": {
+        "Small": "xxxxxxxx",
+        "Medium": "xxxxxxxx",
+        "Large": "xxxxxxxx"
+      }
+    },
+    "Type": {
+      "id": "PVTSSF_xxxxxx",
+      "options": {
+        "Feature": "xxxxxxxx",
+        "Bug": "xxxxxxxx",
+        "Research": "xxxxxxxx",
+        "Maintenance": "xxxxxxxx"
+      }
+    },
+    "Project": {
+      "id": "PVTSSF_xxxxxx",
+      "options": {}
+    }
+  },
+
+  "repo": {
+    "_comment": "Only present in repo-level .cc-config.json, not in user-level config",
+    "owner": "yourname",
+    "name": "your-repo",
+    "nodeId": "R_xxxxxxxxx",
+    "projectTag": "your-repo"
+  }
+}
