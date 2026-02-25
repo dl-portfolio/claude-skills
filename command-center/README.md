@@ -13,13 +13,11 @@ Create issues, manage project boards, track work, and maintain living project co
 ## Installation
 
 ```bash
-# Clone into Claude Code's skills directory
-git clone https://github.com/dl-portfolio/claude-skills.git ~/.claude/skills/command-center \
-  --branch main --depth 1 \
-  --no-checkout && \
-cd ~/.claude/skills/command-center && \
-git sparse-checkout set command-center && \
-git checkout
+# Clone the skills collection
+git clone https://github.com/dl-portfolio/claude-skills.git ~/claude-skills --depth 1
+
+# Symlink the command-center skill into Claude Code's skills directory
+ln -s ~/claude-skills/command-center ~/.claude/skills/command-center
 ```
 
 Or manually: copy the `command-center/` folder into `~/.claude/skills/`.
