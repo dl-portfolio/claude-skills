@@ -24,7 +24,7 @@ git clone https://github.com/dl-portfolio/claude-skills.git ~/claude-skills --de
 ln -s ~/claude-skills/session-notes ~/.claude/skills/session-notes
 ```
 
-Restart your AI coding assistant. The `/session-notes` command will be available in all projects.
+Restart Claude Code. The `/session-notes` command will be available in all projects.
 
 ## Usage
 
@@ -104,10 +104,10 @@ Short notes are also identified as potential teasers for big posts: publish befo
 
 ## Security
 
-This skill reads and writes local files only. It makes no network calls, runs no shell commands beyond `wc`, and has no access to git, GitHub CLI, or any credentials.
+This skill reads and writes local files only. It makes no network calls, runs no shell commands beyond `wc` and `date`, and has no access to git, GitHub CLI, or any credentials.
 
 See [SECURITY.md](./SECURITY.md) for the full permission model.
 
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see [LICENSE](../LICENSE) at the repository root.
