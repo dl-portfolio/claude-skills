@@ -37,12 +37,15 @@ This document describes the threat model, permission rationale, and audit guidel
 - `gh repo view` — Get repo metadata for linking
 
 **Git (specific subcommands):**
-- `git checkout/branch` — Branch creation in `/cc work`
-- `git push -u/origin` — Push in `/cc done` (pinned to specific prefixes)
-- `git pull` — Sync before branching
+- `git checkout -b *` — Create the issue branch in `/cc work` (switching branches or `git checkout .` is not allowed)
+- `git branch --show-current` — Name the branch to push (listing, renaming or deleting branches is not allowed)
+- `git push -u origin *` — Push the issue branch in `/cc done`
+- `git pull` (no arguments) — Sync before branching
 - `git status/log/diff` — Read-only state inspection
 - `git rev-parse/symbolic-ref` — Detect repo root, current branch
-- `git stash` — Suggested recovery when working tree is dirty
+
+`git checkout <branch>` and `git stash` appear in SKILL.md only as suggestions for *you* to run; the skill has no
+permission to run them itself.
 
 **Utilities (read-only):**
 - `jq` — Parse JSON output from `gh` commands
@@ -68,7 +71,8 @@ This document describes the threat model, permission rationale, and audit guidel
 | `gh ssh-key add` | Can add attacker's SSH keys |
 | `gh secret set` | Can overwrite repository secrets |
 | `gh workflow run` | Can trigger arbitrary CI/CD |
-| `git push --force` | Destructive history rewrite |
+| `git push --force` | Destructive history rewrite. **Not fully enforceable here:** see Known Risk 4 |
+| `git branch -D`, `git checkout .`, `git stash drop/clear` | Delete branches or discard work (excluded by the narrow patterns above) |
 | `git reset --hard` | Destroys uncommitted work |
 | `git config` | Can modify hooks, remotes, aliases |
 | `Edit` tool | `Write` is sufficient; Edit adds surface area |
@@ -83,7 +87,22 @@ These risks exist in the current design and cannot be fully mitigated:
 
 3. **Token scope creep**: If the user's `gh` token has broad scopes (e.g., `admin:org`), the skill could theoretically be tricked into destructive org-level operations. Mitigation: use minimum necessary scopes (`repo`, `project`).
 
-4. **Issue content injection**: While SKILL.md includes explicit injection defense instructions, a sophisticated attack embedded in issue content could theoretically influence Claude's behavior. Mitigation: always display issue content as quoted data, never process it as instructions.
+4. **Flags can be appended to an allowed command**: `allowed-tools` patterns match a command prefix, so a permitted
+   `git push -u origin <branch>` would also match `git push -u origin <branch> --force`. The skill never asks for a
+   force push, but a successful prompt injection could. Mitigation: add deny rules to your Claude Code settings (deny
+   always wins over allow), for example:
+
+   ```json
+   { "permissions": { "deny": [
+       "Bash(git push * --force*)", "Bash(git push * -f*)",
+       "Bash(git push --force*)",   "Bash(git push -f*)"
+   ] } }
+   ```
+
+   Check the rule syntax against your Claude Code version's permissions docs, and protect `main` with a branch
+   protection rule on GitHub so the server refuses force pushes regardless.
+
+5. **Issue content injection**: While SKILL.md includes explicit injection defense instructions, a sophisticated attack embedded in issue content could theoretically influence Claude's behavior. Mitigation: always display issue content as quoted data, never process it as instructions.
 
 ## Verification
 

@@ -20,18 +20,16 @@ allowed-tools:
   - Bash(gh auth status)
   - Bash(gh repo view *)
   # Git — specific subcommands only
-  - Bash(git checkout *)
-  - Bash(git branch *)
-  - Bash(git push -u *)
-  - Bash(git push origin *)
-  - Bash(git pull *)
+  - Bash(git checkout -b *)
+  - Bash(git branch --show-current)
+  - Bash(git push -u origin *)
+  - Bash(git pull)
   - Bash(git status)
   - Bash(git status *)
   - Bash(git log *)
   - Bash(git diff *)
   - Bash(git rev-parse *)
   - Bash(git symbolic-ref *)
-  - Bash(git stash *)
   # JSON processing
   - Bash(jq *)
   # Safe read-only filesystem

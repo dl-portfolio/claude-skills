@@ -45,7 +45,7 @@ Instructions in the prompt body (for example "never write to .bashrc") are **sof
 Every skill in this collection is checked against the same principles:
 
 1. **No executable scripts.** Skills are prompt-only (`SKILL.md`). No `.sh`, `.py` or other executable files.
-2. **Pinned `allowed-tools`.** Each tool permission is listed individually, down to the subcommand. No broad wildcards such as `Bash(gh *)` or `Bash(git *)`.
+2. **Pinned `allowed-tools`.** Each tool permission is listed individually, down to the subcommand and, where the skill only ever needs one form, the exact flags (`git checkout -b *`, `git branch --show-current`). No broad wildcards such as `Bash(gh *)` or `Bash(git *)`. Patterns match a prefix, so extra flags can still be appended; each `SECURITY.md` says where that matters and which deny rules close it.
 3. **Prompt injection defence.** External content (issues, files) is treated as data, never as instructions.
 4. **File write boundaries.** Each skill states exactly which files it may write to.
 5. **Mutation allowlists.** Where a skill calls an API, the prompt limits it to an allowlist of non-destructive operations. This is a soft boundary; see the skill's `SECURITY.md` for the residual risk.
